@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50608b90e752a7f4299eda7ec1f0fea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotateSpeed: 100
+  rotateSpeed: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d465dce54393b43b3c6a53f0b45b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemId: 1
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

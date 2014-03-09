@@ -13,13 +13,14 @@ public class LevelManager : MonoBehaviour {
 	public int size = 10;
 	public int startX = 4;
 	public int startY = 10;
-	public Transform player;
+	public Player player;
 	public Transform goalObject;
 	public GameSquare genericLevel;
 	public GameSquare startLevelPrefab;
 
 	private GameSquare startLevel;
 	private MazeCreator maze;
+	private GUIController gui;
 	private int curX;
 	private int curY;
 
@@ -27,6 +28,7 @@ public class LevelManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		gui = GameObject.Find("Logic Controller").GetComponent<GUIController>();
 		gameBoard = new GameSquare[size,size];
 		maze = new MazeCreator(size, 3, new int[]{startX, startY - 1});
 		Debug.Log("End at " + maze.end[0].ToString() + " " + maze.end[1].ToString());
@@ -53,6 +55,8 @@ public class LevelManager : MonoBehaviour {
 				curY = 0;
 			if(curY < 0)
 				curY = size - 1;
+		} else {
+			if(gui != null && player.goalAcheived == true) gui.LevelDone();
 		}
 
 		ActivateCurrentSquare();
@@ -78,11 +82,9 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	private void ActivateCurrentSquare() {
-		Debug.Log("Activating Square " + curX.ToString() + " " + curY.ToString());
 		if(curX == startX && curY == startY) {
 			if(startLevel == null) {
 				startLevel = (GameSquare) Instantiate(startLevelPrefab, Vector3.zero, Quaternion.identity);
-				Debug.Log("Activating Square " + curX.ToString() + " " + curY.ToString());
 				startLevel.Activate();
 			} else {
 				startLevel.Activate();
@@ -91,8 +93,6 @@ public class LevelManager : MonoBehaviour {
 			if(currentSquare() == null) {
 				gameBoard[curX, curY] = (GameSquare) Instantiate(genericLevel, Vector3.zero, Quaternion.identity);
 				if(maze.end[0] == curX && maze.end[1] == curY) InstantiateGoalObject(currentSquare());
-				
-				Debug.Log("Activating Square " + curX.ToString() + " " + curY.ToString());
 			}
 			currentSquare().Activate();
 		}
