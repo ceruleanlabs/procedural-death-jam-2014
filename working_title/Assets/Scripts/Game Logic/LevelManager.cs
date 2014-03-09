@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour {
 	public int startY = 9;
 	public Transform player;
 	public GameSquare genericLevel;
+
+	private MazeCreator maze;
 	private int curX;
 	private int curY;
 
@@ -23,6 +25,7 @@ public class LevelManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameBoard = new GameSquare[size,size];
+		maze = new MazeCreator(size, 3, new int[]{startX, startY});
 		curX = startX;
 		curY = startY;
 		ActivateCurrentSquare();

@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Game Logic\GameSquare.cs" />
      <Compile Include="Assets\Scripts\Game Logic\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\Game Logic\MazeCreator.cs" />
      <Compile Include="Assets\Scripts\Game Logic\Portal.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
