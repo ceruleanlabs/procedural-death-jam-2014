@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour {
 	public int startX = 4;
 	public int startY = 9;
 	public Transform player;
+	public Transform goalObject;
 	public GameSquare genericLevel;
 
 	private MazeCreator maze;
@@ -26,6 +27,7 @@ public class LevelManager : MonoBehaviour {
 	void Start () {
 		gameBoard = new GameSquare[size,size];
 		maze = new MazeCreator(size, 3, new int[]{startX, startY});
+		Debug.Log("End at " + maze.end[0].ToString() + " " + maze.end[1].ToString());
 		curX = startX;
 		curY = startY;
 		ActivateCurrentSquare();
@@ -73,6 +75,7 @@ public class LevelManager : MonoBehaviour {
 	private void ActivateCurrentSquare() {
 		if(gameBoard[curX, curY] == null) {
 			gameBoard[curX, curY] = (GameSquare) Instantiate(genericLevel, Vector3.zero, Quaternion.identity);
+			if(maze.end[0] == curX && maze.end[1] == curY) InstantiateGoalObject(gameBoard[curX, curY]);
 			Debug.Log("Activating Square " + curX.ToString() + " " + curY.ToString());
 		}
 		gameBoard[curX, curY].Activate();
@@ -81,5 +84,11 @@ public class LevelManager : MonoBehaviour {
 	private void MovePlayerToSpawn(Directions dir) {
 		player.transform.position = gameBoard[curX, curY].spawnForOppositeDirection(dir).position;
 		player.transform.rotation = gameBoard[curX, curY].spawnForOppositeDirection(dir).rotation;
+	}
+
+	private void InstantiateGoalObject (GameSquare endSqaure) {
+		Transform clonedObject = (Transform) Instantiate(goalObject);
+		goalObject.transform.position = new Vector3(0, 1, 0);
+		clonedObject.transform.parent = endSqaure.transform;
 	}
 }
