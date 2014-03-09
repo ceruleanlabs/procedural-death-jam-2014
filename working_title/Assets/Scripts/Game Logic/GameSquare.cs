@@ -43,9 +43,9 @@ public class GameSquare : MonoBehaviour {
 
 	public void Activate() {
 		gameObject.SetActive(true);
-		NorthDoor.Activate();
-		SouthDoor.Activate();
-		WestDoor.Activate();
-		EastDoor.Activate();
+		if(NorthDoor != null) NorthDoor.Activate();
+		if(SouthDoor != null) SouthDoor.Activate();
+		if(WestDoor != null) WestDoor.Activate();
+		if(EastDoor != null) EastDoor.Activate();
 	}
 }

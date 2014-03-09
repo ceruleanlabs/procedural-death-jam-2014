@@ -12,11 +12,13 @@ public enum Directions
 public class LevelManager : MonoBehaviour {
 	public int size = 10;
 	public int startX = 4;
-	public int startY = 9;
+	public int startY = 10;
 	public Transform player;
 	public Transform goalObject;
 	public GameSquare genericLevel;
+	public GameSquare startLevelPrefab;
 
+	private GameSquare startLevel;
 	private MazeCreator maze;
 	private int curX;
 	private int curY;
@@ -26,12 +28,12 @@ public class LevelManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameBoard = new GameSquare[size,size];
-		maze = new MazeCreator(size, 3, new int[]{startX, startY});
+		maze = new MazeCreator(size, 3, new int[]{startX, startY - 1});
 		Debug.Log("End at " + maze.end[0].ToString() + " " + maze.end[1].ToString());
 		curX = startX;
 		curY = startY;
 		ActivateCurrentSquare();
-		MovePlayerToSpawn(Directions.South);
+		MovePlayerToSpawn(Directions.North);
 	}
 
 	// Moves the player to a new square
@@ -41,14 +43,17 @@ public class LevelManager : MonoBehaviour {
 		int[] dir = DirToCoord(direction);
 		curX = curX + dir[0];
 		curY = curY + dir[1];
-		if(curX > size - 1)
-			curX = 0;
-		if(curX < 0)
-			curX = size - 1;
-		if(curY > size - 1)
-			curY = 0;
-		if(curY < 0)
-			curY = size - 1;
+
+		if(!(curX == startX && curY == startY)) {
+			if(curX > size - 1)
+				curX = 0;
+			if(curX < 0)
+				curX = size - 1;
+			if(curY > size - 1)
+				curY = 0;
+			if(curY < 0)
+				curY = size - 1;
+		}
 
 		ActivateCurrentSquare();
 		MovePlayerToSpawn(direction);
@@ -69,26 +74,46 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	private void DeactivateCurrentSquare() {
-		gameBoard[curX, curY].Deactivate();
+		currentSquare().Deactivate();
 	}
 
 	private void ActivateCurrentSquare() {
-		if(gameBoard[curX, curY] == null) {
-			gameBoard[curX, curY] = (GameSquare) Instantiate(genericLevel, Vector3.zero, Quaternion.identity);
-			if(maze.end[0] == curX && maze.end[1] == curY) InstantiateGoalObject(gameBoard[curX, curY]);
-			Debug.Log("Activating Square " + curX.ToString() + " " + curY.ToString());
+		Debug.Log("Activating Square " + curX.ToString() + " " + curY.ToString());
+		if(curX == startX && curY == startY) {
+			if(startLevel == null) {
+				startLevel = (GameSquare) Instantiate(startLevelPrefab, Vector3.zero, Quaternion.identity);
+				Debug.Log("Activating Square " + curX.ToString() + " " + curY.ToString());
+				startLevel.Activate();
+			} else {
+				startLevel.Activate();
+			}
+		} else {
+			if(currentSquare() == null) {
+				gameBoard[curX, curY] = (GameSquare) Instantiate(genericLevel, Vector3.zero, Quaternion.identity);
+				if(maze.end[0] == curX && maze.end[1] == curY) InstantiateGoalObject(currentSquare());
+				
+				Debug.Log("Activating Square " + curX.ToString() + " " + curY.ToString());
+			}
+			currentSquare().Activate();
 		}
-		gameBoard[curX, curY].Activate();
 	}
 
 	private void MovePlayerToSpawn(Directions dir) {
-		player.transform.position = gameBoard[curX, curY].spawnForOppositeDirection(dir).position;
-		player.transform.rotation = gameBoard[curX, curY].spawnForOppositeDirection(dir).rotation;
+		player.transform.position = currentSquare().spawnForOppositeDirection(dir).position;
+		player.transform.rotation = currentSquare().spawnForOppositeDirection(dir).rotation;
 	}
 
 	private void InstantiateGoalObject (GameSquare endSqaure) {
 		Transform clonedObject = (Transform) Instantiate(goalObject);
 		goalObject.transform.position = new Vector3(0, 1, 0);
 		clonedObject.transform.parent = endSqaure.transform;
+	}
+
+	private GameSquare currentSquare() {
+		if(curX == startX && curY == startY) {
+			return startLevel;
+		} else {
+			return gameBoard[curX, curY];
+		}
 	}
 }
