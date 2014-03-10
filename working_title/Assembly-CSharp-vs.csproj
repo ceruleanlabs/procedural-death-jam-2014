@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Basic Scripts\Collectable.cs" />
      <Compile Include="Assets\Scripts\Basic Scripts\ItemSpawner.cs" />
      <Compile Include="Assets\Scripts\Basic Scripts\Rotates.cs" />
+     <Compile Include="Assets\Scripts\Editor GUI\Gizmo.cs" />
      <Compile Include="Assets\Scripts\GUI\GUIController.cs" />
      <Compile Include="Assets\Scripts\Game Logic\GameSquare.cs" />
      <Compile Include="Assets\Scripts\Game Logic\LevelManager.cs" />
