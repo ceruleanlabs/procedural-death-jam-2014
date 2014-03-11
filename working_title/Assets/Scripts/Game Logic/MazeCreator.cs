@@ -16,9 +16,7 @@ public class MazeCreator {
 
 		alreadyVisted = new bool[size, size];
 		solutionPath = new bool[size, size];
-
-
-
+		
 		start = new int[2] { (int)(Random.value * size), (int)(Random.value * size) };
 		end = new int[2] { (int)(Random.value * size), (int)(Random.value * size) };
 		Debug.Log (start);
@@ -113,7 +111,7 @@ public class MazeCreator {
 		}
 	//Checks if maze is still solvable if we go a direction
 	private bool isSolvable(int x, int y) {
-		int[,] cloned_maze = maze.Clone();
+
 		int endX = end[0];
 		int endY = end[1];
 		int width = maze.GetLength(0);
@@ -122,25 +120,25 @@ public class MazeCreator {
 		if (x == endX && y == endY) return true; // If you reached the end
 		if (!validNext(x, y)) return false;  
 		// If you are on a wall or already were here
-		alreadyVisted[x][y] = true;
+		alreadyVisted[x,y] = true;
 		if (x != 0) // Checks if not on left edge
 		if (isSolvable(x-1, y)) { // Recalls method one to the left
-			solutionPath[x][y] = true; // Sets that path value to true;
+			solutionPath[x,y] = true; // Sets that path value to true;
 			return true;
 		}
 		if (x != width - 1) // Checks if not on right edge
 		if (isSolvable(x+1, y)) { // Recalls method one to the right
-			solutionPath[x][y] = true;
+			solutionPath[x,y] = true;
 			return true;
 		}
 		if (y != 0)  // Checks if not on top edge
 		if (isSolvable(x, y-1)) { // Recalls method one up
-			solutionPath[x][y] = true;
+			solutionPath[x,y] = true;
 			return true;
 		}
 		if (y != height- 1) // Checks if not on bottom edge
 		if (isSolvable(x, y+1)) { // Recalls method one down
-			solutionPath[x][y] = true;
+			solutionPath[x,y] = true;
 			return true;
 		}
 		return false;
@@ -153,8 +151,8 @@ public class MazeCreator {
 
 			for (int i=0; i<size; i++) {
 				for (int j=0; j<size; j++) {
-					fake1[i][j] = false;
-					fake2[i][j] = false;
+					fake1[i,j] = false;
+					fake2[i,j] = false;
 					}
 				}
 
