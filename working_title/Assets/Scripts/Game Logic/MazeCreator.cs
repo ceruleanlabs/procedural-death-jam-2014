@@ -96,7 +96,7 @@ public class MazeCreator {
 		int maxX = maze.GetLength(0);
 		int maxY = maze.GetLength(1);
 
-		if (nextX > maxX || nextY > maxY || maze [nextX, nextX] == 1) valid = false;
+		if (nextX > maxX || nextY > maxY || have_visited(nextX, nextY)) valid = false;
 
 		return valid;
 
