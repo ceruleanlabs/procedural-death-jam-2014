@@ -13,6 +13,8 @@ public class MazeCreator {
 
 		start = new int[2] { (int)(Random.value * size), (int)(Random.value * size) };
 		end = new int[2] { (int)(Random.value * size), (int)(Random.value * size) };
+		Debug.Log (start);
+			Debug.Log(end);
 		createMazeRoute();
 	}
 
@@ -75,4 +77,29 @@ public class MazeCreator {
 			maze[curX,curY] = 1;
 		}
 	}
+
+	private bool have_visited(int nextX, int nextY) {
+
+		bool rval = false;
+		if (maze[nextX, nextX] == 1) {
+			rval = true;
+		}
+
+		return rval;
+
+	}
+
+	private bool valid_next(int nextX, int nextY) {
+
+		bool valid = true;
+
+		int maxX = maze.GetLength(0);
+		int maxY = maze.GetLength(1);
+
+		if (nextX > maxX || nextY > maxY || maze [nextX, nextX] == 1) valid = false;
+
+		return valid;
+
+		}
+
 }
