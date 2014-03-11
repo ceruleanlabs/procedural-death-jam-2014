@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
-	public int health = 100;
+public class Player : Controllable {
 	public bool goalAcheived = false;
 
 	public void collectItem(Collectable collectedItem) {
