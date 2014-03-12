@@ -20,7 +20,6 @@ public class GUIController : MonoBehaviour {
 				// Reset Level
 			}
 		}
-
 	}
 
 	public void LevelDone() {

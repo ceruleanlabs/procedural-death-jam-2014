@@ -375,6 +375,7 @@ GameObject:
   - 4: {fileID: 909424195}
   - 114: {fileID: 909424194}
   - 114: {fileID: 909424196}
+  - 114: {fileID: 909424197}
   m_Layer: 0
   m_Name: Logic Controller
   m_TagString: Untagged
@@ -481,6 +482,21 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+--- !u!114 &909424197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 909424193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d043b6c7e5c149148a3512e953de811e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texture: {fileID: 2800000, guid: 6f52862f64746434ebd2bf1a914b0289, type: 3}
+  angle: 0
+  size: {x: 128, y: 128}
+  target: {fileID: 842525150}
 --- !u!1 &1412947907
 GameObject:
   m_ObjectHideFlags: 0
