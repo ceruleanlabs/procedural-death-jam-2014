@@ -363,6 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  invulnerabilityTime: 1
   goalAcheived: 0
 --- !u!1 &909424193
 GameObject:

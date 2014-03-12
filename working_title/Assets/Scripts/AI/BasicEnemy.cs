@@ -13,13 +13,14 @@ public class BasicEnemy : Controllable {
 	public float gravity = 10.0f;
 	public float maxVelocityChange = 10.0f;
 	public float range = 2.0f;
-	public float attack = 1.0f;
 	public float attackTimer = 3.0f;
+	public Transform target;
+	public Transform model;
+	public Transform weaponHand;
+
 	private float attackCountdown = 0.0f;
 	private bool grounded = false;
 	private float speed;
-	public Transform target;
-	public Transform model;
 	
 	void Start () {
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -76,7 +77,8 @@ public class BasicEnemy : Controllable {
 	}
 
 	private void Attack() {
-		target.gameObject.SendMessage("TakeDamage",attack);
+		//target.gameObject.SendMessage("TakeDamage",attack);
+		if(weaponHand) weaponHand.animation.Play("Swing");
 		attackCountdown = attackTimer;
 	}
 }
