@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ItemSpawner : MonoBehaviour {
+public class ScenerySpawner : MonoBehaviour {
 	public Transform tree1;
 	public int minTrees;
 	public int maxTrees;

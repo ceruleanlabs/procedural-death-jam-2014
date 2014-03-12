@@ -283,13 +283,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59545128b1c4f344b8409d0ad5397830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
-  speed: 3
+  health: 2
+  minSpeed: 1
+  maxSpeed: 5
   gravity: 10
   maxVelocityChange: 10
   range: 2
   attack: 1
   attackTimer: 3
+  target: {fileID: 0}
   model: {fileID: 400002}
 --- !u!136 &13600000
 CapsuleCollider:

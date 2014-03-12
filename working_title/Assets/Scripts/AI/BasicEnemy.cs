@@ -8,7 +8,8 @@ using System.Collections;
 
 public class BasicEnemy : Controllable {
 	
-	public float speed = 10.0f;
+	public float minSpeed = 10.0f;
+	public float maxSpeed = 10.0f;
 	public float gravity = 10.0f;
 	public float maxVelocityChange = 10.0f;
 	public float range = 2.0f;
@@ -16,11 +17,13 @@ public class BasicEnemy : Controllable {
 	public float attackTimer = 3.0f;
 	private float attackCountdown = 0.0f;
 	private bool grounded = false;
-	private Transform target;
+	private float speed;
+	public Transform target;
 	public Transform model;
 	
 	void Start () {
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
+		speed = Random.Range(minSpeed, maxSpeed);
 		if(player != null) target = player.transform;
 	}
 	
@@ -31,12 +34,14 @@ public class BasicEnemy : Controllable {
 
 	void Update () {
 		attackCountdown -= Time.deltaTime;
-		if(Vector3.Distance(transform.position, target.position) <= range && CanAttack()) {
+		if(target != null && Vector3.Distance(transform.position, target.position) <= range && CanAttack()) {
 			Attack();
 		}
 	}
 	
 	void FixedUpdate () {
+		if(target == null) return;
+
 		if(model != null) model.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
 
 		if (grounded && Vector3.Distance(transform.position, target.position) > range) {

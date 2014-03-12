@@ -21,8 +21,10 @@ public class Portal : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider other) {
-		lm_reference.Move(direction);
-		collider.isTrigger = false;
+		if(other.tag == "Player") {
+			lm_reference.Move(direction);
+			collider.isTrigger = false;
+		}
 	}
 
 	void Update() {

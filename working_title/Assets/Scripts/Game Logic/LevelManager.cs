@@ -93,6 +93,8 @@ public class LevelManager : MonoBehaviour {
 			if(currentSquare() == null) {
 				gameBoard[curX, curY] = (GameSquare) Instantiate(genericLevel, Vector3.zero, Quaternion.identity);
 				if(maze.end[0] == curX && maze.end[1] == curY) InstantiateGoalObject(currentSquare());
+				gameBoard[curX, curY].difficulty = maze.maze[curX, curY];
+				gameBoard[curX, curY].StartSpawners();
 			}
 			currentSquare().Activate();
 		}

@@ -48,4 +48,26 @@ public class GameSquare : MonoBehaviour {
 		if(WestDoor != null) WestDoor.Activate();
 		if(EastDoor != null) EastDoor.Activate();
 	}
+
+	public void StartSpawners() {
+		foreach (Transform child in transform)
+		{
+			EnemySpawner spawner = child.GetComponent<EnemySpawner>();
+			if(spawner != null) {
+				switch(difficulty) {
+					case 1:
+						spawner.Spawn(0, 1);
+						break;
+					case 2:
+						spawner.Spawn(1, 2);
+						break;
+					case 3:
+						spawner.Spawn(3, 4);
+						break;
+					default:
+						break;
+				}
+			}
+		}
+	}
 }
