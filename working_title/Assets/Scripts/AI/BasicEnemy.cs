@@ -33,7 +33,8 @@ public class BasicEnemy : Controllable {
 		rigidbody.useGravity = false;
 	}
 
-	void Update () {
+	protected override void Update () {
+		base.Update();
 		attackCountdown -= Time.deltaTime;
 		if(target != null && Vector3.Distance(transform.position, target.position) <= range && CanAttack()) {
 			Attack();

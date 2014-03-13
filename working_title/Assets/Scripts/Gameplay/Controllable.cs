@@ -7,7 +7,7 @@ public class Controllable : MonoBehaviour {
 	public Transform render_model;
 	private float invulnCountDown = 0;
 
-	void Update () {
+	protected virtual void Update () {
 		invulnCountDown -= Time.deltaTime;
 	}
 
