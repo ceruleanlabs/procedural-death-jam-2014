@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnemySpawner : MonoBehaviour {
-	public Transform enemyType;
-
+public class ItemSpawner : MonoBehaviour {
+	public Transform itemType;
+	
 	public void Spawn (int min, int max) {
 		max = Mathf.Min(max, transform.childCount);
 		List<Transform> samplePositions = new List<Transform>();
@@ -26,8 +26,8 @@ public class EnemySpawner : MonoBehaviour {
 		}
 		
 		foreach (Transform pickedPosition in pickedPositions) {
-			Transform newEnemy = (Transform) Instantiate(enemyType, pickedPosition.position, Quaternion.identity);
-			newEnemy.parent = pickedPosition;
+			Transform item = (Transform) Instantiate(itemType, pickedPosition.position, Quaternion.identity);
+			item.parent = pickedPosition;
 		}
 	}
 }

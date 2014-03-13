@@ -6,8 +6,15 @@ public class Player : Controllable {
 	public PlayerWeapon weapon;
 
 	public void collectItem(Collectable collectedItem) {
-		if(collectedItem.itemId == Items.GoalItem) {
-			goalAcheived = true;
+		switch(collectedItem.itemId) {
+			case Items.GoalItem:
+				goalAcheived = true;
+				break;
+			case Items.HeartLarge:
+				health += 1f;
+				break;
+			default:
+				break;
 		}
 	}
 

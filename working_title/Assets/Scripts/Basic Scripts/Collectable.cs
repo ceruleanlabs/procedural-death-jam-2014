@@ -3,7 +3,8 @@ using System.Collections;
 
 public enum Items
 {
-	GoalItem = 1
+	GoalItem = 1,
+	HeartLarge = 2
 };
 
 public class Collectable : MonoBehaviour {

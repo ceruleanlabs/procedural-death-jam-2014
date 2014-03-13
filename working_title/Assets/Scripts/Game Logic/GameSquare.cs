@@ -52,6 +52,8 @@ public class GameSquare : MonoBehaviour {
 	public void StartSpawners() {
 		foreach (Transform child in transform)
 		{
+			ItemSpawner itemSpawner = child.GetComponent<ItemSpawner>();
+			if(itemSpawner != null && (difficulty == 1 || difficulty == 2)) itemSpawner.Spawn(0, 1);
 			EnemySpawner spawner = child.GetComponent<EnemySpawner>();
 			if(spawner != null) {
 				switch(difficulty) {
@@ -62,7 +64,7 @@ public class GameSquare : MonoBehaviour {
 						spawner.Spawn(1, 2);
 						break;
 					case 3:
-						spawner.Spawn(3, 4);
+						spawner.Spawn(2, 3);
 						break;
 					default:
 						break;
