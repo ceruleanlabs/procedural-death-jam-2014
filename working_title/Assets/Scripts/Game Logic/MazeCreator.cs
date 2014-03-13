@@ -72,11 +72,9 @@ public class MazeCreator {
 			bool tried_right = false;
 			bool tried_up = false;
 			bool tried_down = false;
-			Debug.Log("beforeloop");
 
 			//Shouldn't ever happen, but sanity
 			while(tried_all(tried_up, tried_down, tried_left, tried_right) == false){
-				Debug.Log("inloop");
 				int pm_one = plus_or_minus_one();
 
 				float rand = Random.value;
@@ -104,15 +102,13 @@ public class MazeCreator {
 					if (solveMaze(newMaze, curX+moveX, curY+moveY) != false){
 						curX += moveX;
 						curY += moveY;
+						Debug.Log("PATH X"+curX+"Y"+curY);
 						maze[curX,curY] = 1;
 						break;
 					}
 				}
 
 			}
-
-			Debug.Log("FAILED X"+curX+"Y"+curY);
-
 
 		}
 
