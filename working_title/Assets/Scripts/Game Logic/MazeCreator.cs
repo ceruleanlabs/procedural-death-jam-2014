@@ -63,10 +63,9 @@ public class MazeCreator {
 		int curX = start[0];
 		int curY = start[1];
 
-		while (curX != end[0] && curY != end[1]) {
+		while (curX != end[0] || curY != end[1]) {
 
-			int moveX = 0;
-			int moveY = 0;
+
 
 			bool tried_left = false;
 			bool tried_right = false;
@@ -76,6 +75,8 @@ public class MazeCreator {
 			//Shouldn't ever happen, but sanity
 			while(tried_all(tried_up, tried_down, tried_left, tried_right) == false){
 				int pm_one = plus_or_minus_one();
+				int moveX = 0;
+				int moveY = 0;
 
 				float rand = Random.value;
 				if (rand < 0.5){
@@ -98,8 +99,10 @@ public class MazeCreator {
 				int potentialNextY = curY+moveY;
 				if (validNext(potentialNextX, potentialNextY)){
 					int[,] newMaze = (int[,]) maze.Clone();
-					newMaze[curX+moveX, curY+moveY] = 1;
-					if (solveMaze(newMaze, curX+moveX, curY+moveY) != false){
+					newMaze[potentialNextX, potentialNextY] = 1;
+					bool solvable = solveMaze(newMaze, potentialNextX, potentialNextY);
+					//Debug.Log("SOLVABLE"+solvable);
+					if ( solvable != false){
 						curX += moveX;
 						curY += moveY;
 						Debug.Log("PATH X"+curX+"Y"+curY);
@@ -109,6 +112,7 @@ public class MazeCreator {
 				}
 
 			}
+
 
 		}
 
@@ -221,11 +225,11 @@ public class MazeCreator {
 		}
 
 
-	public bool solveMaze(int[,] maze, int startX, int startY) {
+	public bool solveMaze(int[,] new_maze, int startX, int startY) {
 
-		for (int row = 0; row < maze.GetLength(0); row++)  
+		for (int row = 0; row < new_maze.GetLength(0); row++)  
 			// Sets bool Arrays to default values
-		for (int col = 0; col < maze.GetLength(1); col++){
+		for (int col = 0; col < new_maze.GetLength(1); col++){
 			wasHere[row,col] = false;
 			correctPath[row,col] = false;
 		}
