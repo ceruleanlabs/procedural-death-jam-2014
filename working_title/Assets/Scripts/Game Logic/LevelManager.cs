@@ -31,7 +31,15 @@ public class LevelManager : MonoBehaviour {
 		gui = GameObject.Find("Logic Controller").GetComponent<GUIController>();
 		gameBoard = new GameSquare[size,size];
 		maze = new MazeCreator(size, 3, new int[]{startX, startY - 1});
+		Debug.Log("Start at " + maze.start[0].ToString() + " " + maze.start[1].ToString());
 		Debug.Log("End at " + maze.end[0].ToString() + " " + maze.end[1].ToString());
+		for(int i = 0; i < 10; i++) {
+			string test = "";
+			for(int j = 0; j < 10; j++) {
+				test += maze.maze[j,i].ToString();
+			}
+			Debug.Log(test);
+		}
 		curX = startX;
 		curY = startY;
 		ActivateCurrentSquare();

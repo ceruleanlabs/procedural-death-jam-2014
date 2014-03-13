@@ -364,6 +364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   invulnerabilityTime: 1
+  render_model: {fileID: 205375120}
   goalAcheived: 0
 --- !u!1 &909424193
 GameObject:
