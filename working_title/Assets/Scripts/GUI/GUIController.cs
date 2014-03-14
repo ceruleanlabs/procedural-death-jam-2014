@@ -8,12 +8,10 @@ public class GUIController : MonoBehaviour {
 
 	private LevelManager levelManager;
 	private bool levelDone = false;
-	private Player player;
 	GUI.WindowFunction windowFunction;
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindWithTag("Player").GetComponent<Player>();
 		levelManager = GameObject.Find("Logic Controller").GetComponent<LevelManager>();
 		windowFunction = DrawHealth;
 	}
@@ -27,7 +25,15 @@ public class GUIController : MonoBehaviour {
 			}
 		}
 
-		GUI.Window (0, new Rect(10, 10, (int)(player.health * 37), 32), windowFunction, "test", heartContainerStyle);
+		if(!levelManager.playerAlive()) {
+			GUI.Box (new Rect (Screen.width/2-50, Screen.height/2-25, 100, 50), "You have died!", centeredGui);
+
+			if(GUI.Button(new Rect (Screen.width/2-63, Screen.height/2-25 + 50, 126, 50), "New Adventure")) {
+				levelManager.InitGame();
+			}
+		}
+
+		GUI.Window (0, new Rect(10, 10, (int)(levelManager.getPlayer().health * 37), 32), windowFunction, "test", heartContainerStyle);
 	}
 
 	public void LevelDone() {
@@ -35,7 +41,7 @@ public class GUIController : MonoBehaviour {
 	}
 
 	private void DrawHealth(int windowID) {
-		for(int i = 0; i < Mathf.CeilToInt(player.health); i += 1) {
+		for(int i = 0; i < Mathf.CeilToInt(levelManager.getPlayer().health); i += 1) {
 			GUI.Box(new Rect(i * 32 + i * 5, 0, 32, 32), heartTexture, heartContainerStyle);
 		}
 	}

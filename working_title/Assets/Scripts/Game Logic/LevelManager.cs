@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour {
 	public int size = 10;
 	public int startX = 4;
 	public int startY = 10;
-	public Player player;
+	public Player playerCharacter;
 	public Transform goalObject;
 	public GameSquare genericLevel;
 	public GameSquare startLevelPrefab;
@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour {
 	private GUIController gui;
 	private int curX;
 	private int curY;
+	private Player player;
 
 	private GameSquare[,] gameBoard;
 
@@ -37,15 +38,24 @@ public class LevelManager : MonoBehaviour {
 
 	public void InitGame () {
 		// First reset anything that already exists
+		if(player) player.goalAcheived = false;
+		if(startLevel != null) {
+			Destroy(startLevel.gameObject);
+			startLevel = null;
+		}
 		if(mainRune != null) runes.Add(mainRune);
 		if(gameBoard != null) {
 			for(int i = 0; i < gameBoard.GetLength(0); i++) {
 				for(int j = 0; j < gameBoard.GetLength(1); j++){
-					if(gameBoard[i, j] != null) Destroy(gameBoard[i, j].gameObject);
+					if(gameBoard[i, j] != null) {
+						Destroy(gameBoard[i, j].gameObject);
+						gameBoard[i, j] = null;
+					}
 				}
 			}
 		}
 
+		if(player == null) player = (Player) Instantiate(playerCharacter, Vector3.zero, Quaternion.Euler(0, -90, 0));
 		gameBoard = new GameSquare[size,size];
 		maze = new MazeCreator(size, 3, new int[]{startX, startY - 1});
 		Debug.Log("Start at " + maze.start[0].ToString() + " " + maze.start[1].ToString());
@@ -90,6 +100,14 @@ public class LevelManager : MonoBehaviour {
 		ActivateCurrentSquare();
 		MovePlayerToSpawn(direction);
 		Debug.Log("Player At " + curX.ToString() + " " + curY.ToString());
+	}
+
+	public bool playerAlive(){
+		return player != null && player.health > 0;
+	}
+
+	public Player getPlayer() {
+		return player;
 	}
 	
 	private int[] DirToCoord(Directions direction) {
