@@ -7,42 +7,39 @@ public class Portal : MonoBehaviour {
 	// Bunch of timer shit because apparently setting a parent to inactive doesn't stop the trigger from firing
 	public float activationTime = 2.0f;
 	private float activationTimer;
+	private bool portalActive = true;
 
 	private LevelManager lm_reference;
 
 	void Start () {
-		collider.isTrigger = false;
 		activationTimer = activationTime;
+		collider.isTrigger = true;
 	}
 
 	void Awake () {
-		collider.isTrigger = false;
 		lm_reference = GameObject.Find("Logic Controller").GetComponent<LevelManager>();
 	}
 	
 	void OnTriggerEnter(Collider other) {
-		if(other.tag == "Player") {
+		if(other.tag == "Player" && activationTimer <= 0 && portalActive) {
+			portalActive = false;
 			lm_reference.Move(direction);
-			collider.isTrigger = false;
 		}
 	}
 
 	void Update() {
 		if(activationTimer > 0) {
 			activationTimer = activationTimer - Time.deltaTime;
-			if(activationTimer <= 0) {
-				collider.isTrigger = true;
-			}
 		}
 	}
 
 	public void Deactivate() {
-		collider.isTrigger = false;
 		activationTimer = activationTime;
+		portalActive = false;
 	}
 
 	public void Activate() {
-		collider.isTrigger = false;
 		activationTimer = activationTime;
+		portalActive = true;
 	}
 }

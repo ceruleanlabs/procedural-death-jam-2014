@@ -32,6 +32,20 @@ public class LevelManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gui = GameObject.Find("Logic Controller").GetComponent<GUIController>();
+		InitGame();
+	}
+
+	public void InitGame () {
+		// First reset anything that already exists
+		if(mainRune != null) runes.Add(mainRune);
+		if(gameBoard != null) {
+			for(int i = 0; i < gameBoard.GetLength(0); i++) {
+				for(int j = 0; j < gameBoard.GetLength(1); j++){
+					if(gameBoard[i, j] != null) Destroy(gameBoard[i, j].gameObject);
+				}
+			}
+		}
+
 		gameBoard = new GameSquare[size,size];
 		maze = new MazeCreator(size, 3, new int[]{startX, startY - 1});
 		Debug.Log("Start at " + maze.start[0].ToString() + " " + maze.start[1].ToString());
@@ -141,7 +155,7 @@ public class LevelManager : MonoBehaviour {
 			if(curY - 1 >= 0 && maze.maze[curX, curY - 1] == 1) return mainRune;
 			break;
 		case Directions.South:
-			if(curY + 1 < size && maze.maze[curX, curY + 1] == 1) return mainRune;
+			if((curY + 1 < size && maze.maze[curX, curY + 1] == 1) || (curY + 1 == startY && curX == startX)) return mainRune;
 			break;
 		case Directions.East:
 			if(curX + 1 < size && maze.maze[curX + 1, curY] == 1) return mainRune;

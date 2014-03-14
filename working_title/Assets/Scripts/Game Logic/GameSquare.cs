@@ -43,6 +43,10 @@ public class GameSquare : MonoBehaviour {
 
 	public void Deactivate() {
 		gameObject.SetActive(false);
+		if(NorthDoor != null) NorthDoor.Deactivate();
+		if(SouthDoor != null) SouthDoor.Deactivate();
+		if(WestDoor != null) WestDoor.Deactivate();
+		if(EastDoor != null) EastDoor.Deactivate();
 	}
 
 	public void Activate() {
@@ -54,7 +58,6 @@ public class GameSquare : MonoBehaviour {
 	}
 
 	public void StartSpawners() {
-		Debug.Log("HERE!!! " + difficulty.ToString());
 		foreach (Transform child in transform)
 		{
 			ItemSpawner itemSpawner = child.GetComponent<ItemSpawner>();
