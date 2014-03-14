@@ -107,6 +107,13 @@ public class MazeCreator {
 						curY += moveY;
 						Debug.Log("PATH X"+curX+"Y"+curY);
 						maze[curX,curY] = 1;
+
+						flipToTwo(curX+1, curY);
+						flipToTwo(curX-1, curY);
+						flipToTwo(curX, curY+1);
+						flipToTwo(curX, curY-1);
+
+
 						break;
 					}
 				}
@@ -284,6 +291,20 @@ public class MazeCreator {
 			rval = 1;
 		}
 		return rval;
+	}
+
+	// Flips square to 2 if conditions are right
+	private void flipToTwo(int xcoord, int ycoord){
+		int maxX = maze.GetLength(0)-1;
+		int maxY = maze.GetLength(1)-1;
+
+		bool out_of_range = (xcoord > maxX || ycoord > maxY || xcoord < 0 || ycoord < 0);
+
+		if (!out_of_range) {
+			if (maze[xcoord, ycoord] == 3){
+				maze[xcoord, ycoord] = 2;
+				}
+			}
 	}
 
 	// Checks to see if we've tried to move in all 4 directions
