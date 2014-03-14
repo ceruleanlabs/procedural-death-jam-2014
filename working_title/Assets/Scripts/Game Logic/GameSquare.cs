@@ -50,6 +50,7 @@ public class GameSquare : MonoBehaviour {
 	}
 
 	public void StartSpawners() {
+		Debug.Log("HERE!!! " + difficulty.ToString());
 		foreach (Transform child in transform)
 		{
 			ItemSpawner itemSpawner = child.GetComponent<ItemSpawner>();

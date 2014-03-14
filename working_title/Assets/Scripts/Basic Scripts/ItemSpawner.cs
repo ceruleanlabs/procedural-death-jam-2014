@@ -12,6 +12,7 @@ public class ItemSpawner : MonoBehaviour {
 		
 		int count = 0;
 		int target = (int)(Random.value * (max + 1 - min) + min);
+		Debug.Log("ITEM: " + min.ToString() + " " + max.ToString() + " " + target.ToString());
 		
 		foreach (Transform child in transform)
 		{
