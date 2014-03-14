@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum Directions
 {
@@ -17,7 +18,9 @@ public class LevelManager : MonoBehaviour {
 	public Transform goalObject;
 	public GameSquare genericLevel;
 	public GameSquare startLevelPrefab;
+	public List<Transform> runes;
 
+	public Transform mainRune;
 	private GameSquare startLevel;
 	private MazeCreator maze;
 	private GUIController gui;
@@ -42,6 +45,9 @@ public class LevelManager : MonoBehaviour {
 		}
 		curX = startX;
 		curY = startY;
+		int runeIndex = Random.Range(0, runes.Count - 1);
+		mainRune = runes[runeIndex];
+		runes.RemoveAt(runeIndex);
 		ActivateCurrentSquare();
 		MovePlayerToSpawn(Directions.North);
 	}
@@ -93,6 +99,7 @@ public class LevelManager : MonoBehaviour {
 		if(curX == startX && curY == startY) {
 			if(startLevel == null) {
 				startLevel = (GameSquare) Instantiate(startLevelPrefab, Vector3.zero, Quaternion.identity);
+				startLevel.SetRunes(mainRune, runes[0], runes[0], runes[0]);
 				startLevel.Activate();
 			} else {
 				startLevel.Activate();
@@ -103,6 +110,7 @@ public class LevelManager : MonoBehaviour {
 				if(maze.end[0] == curX && maze.end[1] == curY) InstantiateGoalObject(currentSquare());
 				gameBoard[curX, curY].difficulty = maze.maze[curX, curY];
 				gameBoard[curX, curY].StartSpawners();
+				gameBoard[curX, curY].SetRunes(RuneForDirection(Directions.North), RuneForDirection(Directions.South), RuneForDirection(Directions.East), RuneForDirection(Directions.West));
 			}
 			currentSquare().Activate();
 		}
@@ -125,5 +133,23 @@ public class LevelManager : MonoBehaviour {
 		} else {
 			return gameBoard[curX, curY];
 		}
+	}
+
+	private Transform RuneForDirection(Directions dir) {
+		switch(dir) {
+		case Directions.North:
+			if(curY - 1 >= 0 && maze.maze[curX, curY - 1] == 1) return mainRune;
+			break;
+		case Directions.South:
+			if(curY + 1 < size && maze.maze[curX, curY + 1] == 1) return mainRune;
+			break;
+		case Directions.East:
+			if(curX + 1 < size && maze.maze[curX + 1, curY] == 1) return mainRune;
+			break;
+		case Directions.West:
+			if(curX - 1 >= 0 && maze.maze[curX - 1, curY] == 1) return mainRune;
+			break;
+		}
+		return runes[Random.Range(0, runes.Count)];
 	}
 }

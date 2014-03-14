@@ -1902,6 +1902,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
+--- !u!1 &100226
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400226}
+  m_Layer: 0
+  m_Name: North Rune
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -1955,7 +1970,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.70747089, y: 1.84711075, z: 10.7695093}
   m_LocalScale: {x: 1, y: 3.29971623, z: 2.27568936}
-  m_Children: []
+  m_Children:
+  - {fileID: 400226}
   m_Father: {fileID: 400012}
 --- !u!4 &400010
 Transform:
@@ -2024,7 +2040,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.8292532, y: 24.311779, z: -24.2739048}
+  m_LocalPosition: {x: 6.04244041, y: .177342415, z: -5.36479664}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children:
   - {fileID: 400016}
@@ -3257,6 +3273,17 @@ Transform:
   m_Children:
   - {fileID: 400222}
   m_Father: {fileID: 400036}
+--- !u!4 &400226
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100226}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
+  m_LocalPosition: {x: .532830238, y: .214395031, z: 0}
+  m_LocalScale: {x: 1, y: .303056359, z: .439421445}
+  m_Children: []
+  m_Father: {fileID: 400008}
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -6015,6 +6042,10 @@ MonoBehaviour:
   SouthSpawn: {fileID: 400018}
   EastSpawn: {fileID: 400016}
   WestSpawn: {fileID: 400014}
+  NorthRune: {fileID: 400226}
+  WestRune: {fileID: 0}
+  EastRune: {fileID: 0}
+  SouthRune: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

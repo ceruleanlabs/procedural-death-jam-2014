@@ -11,6 +11,10 @@ public class GameSquare : MonoBehaviour {
 	public Transform SouthSpawn;
 	public Transform EastSpawn;
 	public Transform WestSpawn;
+	public Transform NorthRune;
+	public Transform WestRune;
+	public Transform EastRune;
+	public Transform SouthRune;
 
 	private LevelManager lm_reference;
 	private Transform players_transform;
@@ -71,6 +75,25 @@ public class GameSquare : MonoBehaviour {
 						break;
 				}
 			}
+		}
+	}
+
+	public void SetRunes(Transform north, Transform south, Transform east, Transform west) {
+		if(NorthRune != null) {
+			Transform rune = (Transform) Instantiate(north, NorthRune.position, NorthRune.rotation);
+			rune.parent = NorthRune;
+		}
+		if(SouthRune != null) {
+			Transform rune = (Transform) Instantiate(south, SouthRune.position, SouthRune.rotation);
+			rune.parent = SouthRune;
+		}
+		if(EastRune != null) {
+			Transform rune = (Transform) Instantiate(east, EastRune.position, EastRune.rotation);
+			rune.parent = EastRune;
+		}
+		if(WestRune != null) {
+			Transform rune = (Transform) Instantiate(west, WestRune.position, WestRune.rotation);
+			rune.parent = WestRune;
 		}
 	}
 }

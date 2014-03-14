@@ -560,6 +560,14 @@ MonoBehaviour:
   goalObject: {fileID: 400000, guid: af4f835ee86637a41b3dc8fb780a8ebc, type: 2}
   genericLevel: {fileID: 11400000, guid: c6bafdfaf2904a6459b591b31710ede7, type: 2}
   startLevelPrefab: {fileID: 11400002, guid: 158cf309ae7685b4badadd7592843fac, type: 2}
+  runes:
+  - {fileID: 400004, guid: 8997957f036d8294f870af148e072582, type: 2}
+  - {fileID: 400004, guid: 665cd4f15c21466468a02e4082003cc2, type: 2}
+  - {fileID: 400008, guid: bb247c42187844d4fafea22142c31463, type: 2}
+  - {fileID: 400000, guid: 425a53eb7cbe55f478eac6c37e063c96, type: 2}
+  - {fileID: 400010, guid: cfeb93af76f51fb45b2716600e96823c, type: 2}
+  - {fileID: 400012, guid: 8538ae05cccff5445861ae31f3266654, type: 2}
+  mainRune: {fileID: 0}
 --- !u!4 &909424195
 Transform:
   m_ObjectHideFlags: 0
