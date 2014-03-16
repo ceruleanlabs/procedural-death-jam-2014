@@ -1,4 +1,4 @@
-# Working Title
+# Spacebar Steve and the Adventure of the Shiny Thing
 
 We're doing this for the [Procedural Death Jam](http://proceduraldeathjam.com/).
 
@@ -11,7 +11,9 @@ When you first load it up you might need to load up the test_scene from File > L
 ## Deployment
 
 When you want to deploy a new build, build a Web Player build called "rack" and
-make sure it overrides the `rack` directory in the root.
+make sure it overrides the `rack` directory in the root. However don't override
+`rack.html` because there are some custom things added to that we don't want to
+override.
 
 ## Testing Locally
 
