@@ -12,3 +12,7 @@ When you first load it up you might need to load up the test_scene from File > L
 
 When you want to deploy a new build, build a Web Player build called "rack" and
 make sure it overrides the `rack` directory in the root.
+
+## Testing Locally
+
+You can run `rackup` to run the web build locally.
